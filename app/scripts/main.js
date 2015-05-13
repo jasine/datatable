@@ -13,9 +13,9 @@
 // //         "ajax": "http://datatables.net/examples/server_side/scripts/server_processing.php"
 // //     } );
 // // } );
-// // 
-// // 
-// // 
+// //
+// //
+// //
 // // $.fn.dataTable.ext.search.push(
 // //     function( settings, data, dataIndex ) {
 // //         var min = parseInt( $('#min').val(), 10 );
@@ -38,7 +38,7 @@
 //         // var iColumn = 3;
 //         // var iMin = document.getElementById('min').value * 1;
 //         // var iMax = document.getElementById('max').value * 1;
- 
+
 //         // var iVersion = aData[iColumn] == "-" ? 0 : aData[iColumn]*1;
 //         // if ( iMin === "" && iMax === "" )
 //         // {
@@ -60,13 +60,13 @@
 //     }
 // );
 
-//  Custom filtering function which will search data in column four between two values 
+//  Custom filtering function which will search data in column four between two values
 // $.fn.dataTable.ext.search.push(
 //     function( settings, data, dataIndex ) {
 //         // var min = parseInt( $('#min').val(), 10 );
 //         // var max = parseInt( $('#max').val(), 10 );
 //         // var age = parseFloat( data[3] ) || 0; // use data for the age column
- 
+
 //         // if ( ( isNaN( min ) && isNaN( max ) ) ||
 //         //      ( isNaN( min ) && age <= max ) ||
 //         //      ( min <= age   && isNaN( max ) ) ||
@@ -165,6 +165,8 @@
 //     return 0;
 // };
   $(document).ready(function() {
+    $('select').selectpicker();
+
     var oTable=$('#example').dataTable( {
     "lengthChange": true,
     "language": {
@@ -184,17 +186,25 @@
             "dataType": "jsonp",
             "type": "POST"
         }
-    } ).yadcf([  
+    } ).yadcf([
     {
-			column_number: 0
-		},   
+			column_number: 0,
+      //html_data_selector:"li:eq(1)",
+      filter_default_label:"选择平台",
+      filter_container_id:"list-pick",
+      selector_option:["-地图","Android-小米","Android-其他","iOS","-车机","Android","iOS","Wap页","-"]
+		},
         {
           column_number: 4,
           filter_type: "range_date",
 			date_format: "yyyy/mm/dd",
-			filter_delay: 500
+			filter_delay: 500,
+          filter_container_id:"date-pick"
         }
         ]);
+
+    //$('select').selectpicker();
+    //$('select').addClass("selectpicker");
     //var table=$('#example').DataTable();
     //yadcf.exFilterColumn(oTable, [[0, "Trident"]]);
     //var table = $('#example').DataTable();
